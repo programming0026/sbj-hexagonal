@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql8-hexagonal
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: hexagonal_db
+      MYSQL_USER: hexagonal_user
+      MYSQL_PASSWORD: hexagonal_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - hexagonal-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sbj-hexagonal-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/hexagonal_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: hexagonal_user
+      SPRING_DATASOURCE_PASSWORD: hexagonal_pass
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: true
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - hexagonal-network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+
+networks:
+  hexagonal-network:
+    driver: bridge
