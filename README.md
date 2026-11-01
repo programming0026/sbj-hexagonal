@@ -1,6 +1,6 @@
 # SBJ Hexagonal: CRUD con arquitectura hexagonal
 
-API REST de gestión de usuarios con **arquitectura hexagonal** (puertos y adaptadores), Spring Boot 3.5, Java 21 y MySQL 8, documentada con Swagger/OpenAPI.
+API REST de gestión de usuarios con **arquitectura hexagonal** (puertos y adaptadores), Spring Boot 4.0.1, Java 21 y MySQL 8, documentada con Swagger/OpenAPI.
 
 ## Características
 

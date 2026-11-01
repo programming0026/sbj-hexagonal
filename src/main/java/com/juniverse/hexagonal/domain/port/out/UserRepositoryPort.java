@@ -23,10 +23,6 @@ public interface UserRepositoryPort {
     /** Todos los usuarios. */
     List<User> findAll();
     
-    /**
-     * Indica si existe un usuario con ese correo.
-     * @param email correo
-     */
     boolean existsByEmail(String email);
     
     /**
@@ -42,9 +38,5 @@ public interface UserRepositoryPort {
      */
     void deleteById(Long id);
     
-    /**
-     * Indica si existe el usuario.
-     * @param id identificador
-     */
     boolean existsById(Long id);
 }

@@ -1,6 +1,6 @@
 package com.juniverse.hexagonal.infrastructure.adapter.in.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import com.juniverse.hexagonal.domain.entity.User;
 import com.juniverse.hexagonal.domain.exception.UserAlreadyExistsException;
 import com.juniverse.hexagonal.domain.exception.UserNotFoundException;
@@ -12,8 +12,8 @@ import com.juniverse.hexagonal.infrastructure.adapter.in.mapper.UserMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -32,10 +32,10 @@ class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private UserServicePort userServicePort;
 
-    @MockBean
+    @MockitoBean
     private UserMapper userMapper;
 
     @Autowired

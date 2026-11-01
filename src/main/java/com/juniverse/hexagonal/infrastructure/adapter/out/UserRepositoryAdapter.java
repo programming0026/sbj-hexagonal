@@ -33,13 +33,11 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
         return userJpaRepository.findAll();
     }
 
-    /** Indica si existe un usuario con ese correo. */
     @Override
     public boolean existsByEmail(String email) {
         return userJpaRepository.existsByEmail(email);
     }
 
-    /** Indica si otro usuario usa ese correo. */
     @Override
     public boolean existsByEmailAndIdNot(String email, Long id) {
         return userJpaRepository.existsByEmailAndIdNot(email, id);
@@ -51,7 +49,6 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
         userJpaRepository.deleteById(id);
     }
 
-    /** Indica si existe el usuario. */
     @Override
     public boolean existsById(Long id) {
         return userJpaRepository.existsById(id);
